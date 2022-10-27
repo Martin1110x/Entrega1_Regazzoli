@@ -1,0 +1,65 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block barra_menu %}
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'cuentas' %}">Cuentas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'beneficios' %}">Beneficios</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'prestamos' %}">Prestamos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'seguros' %}">Seguros</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'tarjetas' %}">Tarjetas</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Atención al cliente</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                <li><a class="dropdown-item" href="{% url 'centro_de_ayuda' %}">Centro de ayuda</a></li>
+                <li><a class="dropdown-item" href="{% url 'preguntas_frecuentes' %}">Preguntas frecuentes</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuenta</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                {% if user.is_authenticated %}
+                Hola {{user}}  
+                <img height="50px" src="{{ avatar }}" alt="">
+                {% endif %}
+                {% if user.is_superuser %} 
+                <li><a class="dropdown-item" href="{% url 'crear_empleado' %}">Crear empleado</a></li>
+                {% elif user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'crear_transferencia_bancaria' %}">Transferencia bancaria</a></li>
+                <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
+                <li><a class="dropdown-item" href="{% url 'agregar_dinero' %}">Agregar dinero</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Ingresar cuenta</a></li>
+                <li><a class="dropdown-item" href="{% url 'register' %}">Crear usuario</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% endif %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block titulo %}
+    <h1 class="display-5 fw-bolder text-white mb-2">BANCO CODERHOUSE</h1>
+{% endblock %}
+
+{% block oración_abajo_titulo %}
+    <p class="lead fw-normal text-white-50 mb-4">Nuestra misión es contribuir al progreso de las personas y las empresas.</p>
+{% endblock %}
+
+{% block imagen_1 %}
+<div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="{% static 'assets/retrato-hombre-sonriente-trabajando-casa_329181-641.webp' %}" alt="..." /></div>
+{% endblock %}
+
+
+{% block parrafo_1 %}
+    <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">{{ mensaje }}</h2></div>          
+{% endblock %}
+
+{% block parrafo_2 %}
+   
+{% endblock %}

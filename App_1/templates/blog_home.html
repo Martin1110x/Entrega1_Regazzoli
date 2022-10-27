@@ -1,0 +1,99 @@
+{% extends 'padre.html' %}
+
+{% block barra_menu %}
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'cuentas' %}">Cuentas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'beneficios' %}">Beneficios</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'prestamos' %}">Prestamos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'seguros' %}">Seguros</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'tarjetas' %}">Tarjetas</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Atención al cliente</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                <li><a class="dropdown-item" href="{% url 'centro_de_ayuda' %}">Centro de ayuda</a></li>
+                <li><a class="dropdown-item" href="{% url 'preguntas_frecuentes' %}">Preguntas frecuentes</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuenta</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                {% if user.is_authenticated %}
+                Hola {{user}}  
+                <img height="50px" src="{{ avatar }}" alt="">
+                {% endif %}
+                {% if user.is_superuser %} 
+                <li><a class="dropdown-item" href="{% url 'crear_empleado' %}">Crear empleado</a></li>
+                {% elif user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'crear_transferencia_bancaria' %}">Transferencia bancaria</a></li>
+                <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
+                <li><a class="dropdown-item" href="{% url 'agregar_dinero' %}">Agregar dinero</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Ingresar cuenta</a></li>
+                <li><a class="dropdown-item" href="{% url 'register' %}">Crear usuario</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% endif %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block titulo %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Blog Home</h1>
+{% endblock %}
+
+{% block parrafo_1 %}
+<h1 class="red_color">Blog Home</h1>
+<div class="row">
+    {% if object_list %}
+        {% for data in object_list %}
+        <div class="col-sm-6 mt-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ data.name }}</h5>
+                    <span class="badge bg-success">{{data.author}}</span>
+                    <p class="card-text">
+                        {{data.mini_description| truncatechars:200}}
+                    </p>
+                    <a href="{% url 'blog_detail' data.slug %}" class="btn btn-primary"><i class="fa-brands fa-readme"></i> Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="text-danger text-center">No blog found</h2>
+    {% endif %}
+</div>
+
+<div class="mt-5">
+    <nav aria-label="Page navigation example">
+        
+        <ul class="pagination justify-content-between">
+           
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

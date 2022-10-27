@@ -1,0 +1,175 @@
+{% load static %}
+
+{% block extrahead %}
+<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+{{ block.super }}
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Modern Business - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="{% url 'inicio' %}">BANCO CODERHOUSE</a> 
+                    {% block barra_menu %}
+                    
+                    {% endblock %}
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+            <header class="bg-dark py-5">
+                <div class="container px-5">
+                    <div class="row gx-5 align-items-center justify-content-center">
+                        <div class="col-lg-8 col-xl-7 col-xxl-6">
+                            <div class="my-5 text-center text-xl-start">
+                                {% block titulo %}
+
+                                {% endblock %}
+                                
+                                {% block oración_abajo_titulo %}
+
+                                {% endblock %}
+                                
+                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'register' %}">Unirse</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="{% url 'sobre_nosotros' %}">Sobre nosotros</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% block imagen_1 %}
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="{% static 'assets/retrato-hombre-sonriente-trabajando-casa_329181-641.webp' %}" alt="..." /></div>
+                        {% endblock %}
+                    </div>
+                </div>
+            </header>
+                        {% block parrafo_1 %}
+                        
+                        {% endblock %}
+
+                        {% block parrafo_2 %}
+                        
+                        {% endblock %}
+                        
+                    </div>
+                </div>
+            </section>
+            <!-- Blog preview section-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6">
+                            <div class="text-center">
+                                <h2 class="fw-bolder">Nuestro servicio</h2>
+                                <p class="lead fw-normal text-muted mb-5">Te mostramos algunos de nuestros beneficios especiales para nuestros clientes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5">
+                            <div class="card h-100 shadow border-0">
+                                <img class="card-img-top" src="{% static 'assets/persona_computadora_1.jpg' %}" alt="..." />
+                                <div class="card-body p-4">
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'prestamos' %}"><h5 class="card-title mb-3">Prestamos</h5></a>
+                                    <p class="card-text mb-0">Podes conseguir prestamos de hasta $100.000 pesos dependiendo de tu nivel de socio</p>
+                                </div>
+                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                                    <div class="d-flex align-items-end justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-5">
+                            <div class="card h-100 shadow border-0">
+                                <img class="card-img-top" src="{% static 'assets/persona_computadora_2.jpg' %}" alt="..." />
+                                <div class="card-body p-4">
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'seguros' %}"><h5 class="card-title mb-3">Seguros</h5></a>
+                                    <p class="card-text mb-0">Ofrecemos una gran variedad de seguros para nuestros clientes.</p>
+                                </div>
+                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                                    <div class="d-flex align-items-end justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-5">
+                            <div class="card h-100 shadow border-0">
+                                <img class="card-img-top" src="{% static 'assets/persona_computadora_3.jpg' %}" alt="..." />
+                                <div class="card-body p-4">
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'cuentas' %}"><h5 class="card-title mb-3">Cuentas</h5></a>
+                                    <p class="card-text mb-0">Te mostramos los distintos planes de cuentas que podes conseguir.</p>
+                                </div>
+                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                                    <div class="d-flex align-items-end justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Call to action-->
+                    <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
+                        <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+                            <div class="mb-4 mb-xl-0">
+                                <div class="fs-3 fw-bold text-white">Hacete socio de nuestro banco.</div>
+                                <div class="text-white-50">Crea una cuenta y empeza a disfrutar de todos los beneficios que tenemos para brindarte</div>
+                            </div>
+                            <div class="ms-xl-4">
+                                <div class="input-group mb-2">
+                                    <a class="btn btn-outline-light" href="{% url 'register' %}" role="button">Crear usuario</a>
+                                </div>
+                                <div class="small text-white-50">Nos importa tu privacidad y nunca compartiremos tus datos personales.</div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; BancoCoderHouse 2022</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="{% url 'paginaenconstruccion' %}">privacidad</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="{% url 'paginaenconstruccion' %}">Terminos y condiciones</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="{% url 'paginaenconstruccion' %}">Contactos</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
+    </body>
+</html>
+

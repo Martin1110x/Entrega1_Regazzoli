@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Modern Business - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="{% url 'inicio' %}">BANCO CODERHOUSE</a> 
+                    
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'cuentas' %}">Cuentas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'beneficios' %}">Beneficios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'prestamos' %}">Prestamos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'seguros' %}">Seguros</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'tarjetas' %}">Tarjetas</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Atención al cliente</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="{% url 'centro_de_ayuda' %}">Centro de ayuda</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'preguntas_frecuentes' %}">Preguntas frecuentes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuenta</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                                    {% if user.is_authenticated %}
+                                    Hola {{user}}  
+                                    <img height="50px" src="{{ avatar }}" alt="">
+                                    {% endif %}
+                                    <li><a class="dropdown-item" href="{% url 'crear_cliente' %}">Crear cliente</a></li> 
+                                    <li><a class="dropdown-item" href="{% url 'crear_empleado' %}">Crear empleado</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'crear_transferencia_bancaria' %}">Crear transferencia bancaria</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                                    {% else %}
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">Ingresar cuenta</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'register' %}">Crear usuario</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+
+            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                <div class="d-flex align-items-end justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid rounded-3 my-5" src="{% static 'assets/paginaenconstruccion.jpg' %}" alt="..." />
+                    </div>
+                </div>
+            </div>          
