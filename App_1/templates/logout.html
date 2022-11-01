@@ -18,6 +18,7 @@
                 <li><a class="dropdown-item" href="{% url 'preguntas_frecuentes' %}">Preguntas frecuentes</a></li>
             </ul>
         </li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'inbox' %}">Chat</a></li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuenta</a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
@@ -27,16 +28,16 @@
                 {% endif %}
                 {% if user.is_superuser %} 
                 <li><a class="dropdown-item" href="{% url 'crear_empleado' %}">Crear empleado</a></li>
-                {% endif %}
-                {% if user.is_authenticated %}
+                {% elif user.is_authenticated %}
                 <li><a class="dropdown-item" href="{% url 'crear_transferencia_bancaria' %}">Transferencia bancaria</a></li>
                 <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
                 <li><a class="dropdown-item" href="{% url 'agregar_dinero' %}">Agregar dinero</a></li>
-                
-                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
                 {% else %}
                 <li><a class="dropdown-item" href="{% url 'login' %}">Ingresar cuenta</a></li>
                 <li><a class="dropdown-item" href="{% url 'register' %}">Crear usuario</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
                 {% endif %}
             </ul>
         </li>
