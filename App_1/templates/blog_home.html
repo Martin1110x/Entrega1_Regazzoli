@@ -16,6 +16,7 @@
                 <li><a class="dropdown-item" href="{% url 'preguntas_frecuentes' %}">Preguntas frecuentes</a></li>
             </ul>
         </li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'inbox' %}">Chat</a></li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuenta</a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
@@ -40,8 +41,7 @@
         </li>
     </ul>
 {% endblock %}
-
-
+    
 {% block titulo %}
     <h1 class="display-5 fw-bolder text-white mb-2">Blog Home</h1>
 {% endblock %}
