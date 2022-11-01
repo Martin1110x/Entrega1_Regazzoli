@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'App_1',
     'django.forms',
-    'chats',
+    'Chat',
     'ckeditor',
     'ckeditor_uploader',
     'django.contrib.humanize',
