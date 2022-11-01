@@ -1,0 +1,118 @@
+{% extends "padre_chat.html" %}
+
+{% load static %}
+
+{% block barra_menu %}
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'cuentas' %}">Cuentas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'beneficios' %}">Beneficios</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'prestamos' %}">Prestamos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'seguros' %}">Seguros</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'tarjetas' %}">Tarjetas</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Atención al cliente</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                <li><a class="dropdown-item" href="{% url 'centro_de_ayuda' %}">Centro de ayuda</a></li>
+                <li><a class="dropdown-item" href="{% url 'preguntas_frecuentes' %}">Preguntas frecuentes</a></li>
+            </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'inbox' %}">Chat</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cuenta</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                {% if user.is_authenticated %}
+                Hola {{user}}  
+                <img height="50px" src="{{ avatar }}" alt="">
+                {% endif %}
+                {% if user.is_superuser %} 
+                <li><a class="dropdown-item" href="{% url 'crear_empleado' %}">Crear empleado</a></li>
+                {% elif user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'crear_transferencia_bancaria' %}">Transferencia bancaria</a></li>
+                <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
+                <li><a class="dropdown-item" href="{% url 'agregar_dinero' %}">Agregar dinero</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Ingresar cuenta</a></li>
+                <li><a class="dropdown-item" href="{% url 'register' %}">Crear usuario</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% endif %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+
+<div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Bienvenido {{user}} a tus chats!</h2></div>          
+
+
+{% for inbox in inbox %}
+<div class = "div_inbox">
+    {% for second_user in inbox.canal_usuario_set.all %}
+
+        {% if second_user.usuario == request.user %}
+
+        {% else %}
+            <a href="{% url 'Detail_mensajes' second_user.usuario.username %}">
+                <p>
+                    {{second_user.usuario}}
+                </p>
+            </a>
+        {% endif %}
+        
+    {% endfor %}
+
+    {% if inbox.canal_mensaje_set.count != 0 %}
+    <div class = "div_ms_inbox">
+        {% with ultimo_mensaje=inbox.canal_mensaje_set.last %}
+        <p>
+            Mensaje: {{ultimo_mensaje.texto}}  
+        </p>
+        {% endwith %}
+    </div>
+
+    {% else %}
+    <p>
+        No hay mensajes con este usuario
+    </p>
+
+    {% endif %}
+</div>
+
+{% empty %}
+
+<h2>
+    Inbox Vacio
+</h2>
+{% endfor %}
+
+<aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
+    <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+        <div class="mb-4 mb-xl-0">
+            <div class="fs-3 fw-bold text-white">Nuevo chat</div>
+        </div>
+        <div class="ms-xl-4">
+            <div class="input-group mb-2">
+                <a class="btn btn-outline-light" href="{% url 'usuarios_chatear' %}" role="button">Elegir con quien chatear</a>
+            </div>
+        </div>
+    </div>
+</aside>
+</div>
+</section>
+</main>
+
+<style>
+    .div_inbox{
+        width: 90%;
+        margin: 10px auto;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        padding: 5px;
+    }
+</style>
+{% endblock %}
